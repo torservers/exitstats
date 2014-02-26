@@ -11,7 +11,7 @@ script in `tools/get_fingerprints.py` for acquiring all your fingerprints
 
 ### 1. Acquire Extra-Info descriptors ###
 
-Get them at <http://metrics.torproject.org/data>
+Get them at <http://metrics.torproject.org/data.html>
 
 ### 2. Extract relevant data ###
 

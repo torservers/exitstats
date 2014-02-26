@@ -6,6 +6,7 @@ import json
 from datetime import datetime
 
 import pygal
+import jinja2
 
 def chunks(arr, chunk_size = 10):
     chunks  = [ arr[start:start+chunk_size] for start in range(0, len(arr), chunk_size)]
@@ -87,4 +88,38 @@ if __name__ == "__main__":
         for number, process in zip(range(len(partitioned_data)), partitioned_data):
             chart.add("Process %i" % number, [ float(x[1] + x[2]) / 900 / 1024**2 for x in process ])
             
-        chart.render_to_file("graphs/%s.svg" % host)
+        chart.render_to_file("report/graphs/%s.svg" % host)
+        
+        
+    # calculate averages by physical host
+    host_averages = {}
+    for host in hosts.keys():
+        process_averages = []
+        for process in hosts[host]:
+            process_averages.append(
+                float(sum([ p[1] + p[2] for p in process ]))/900/1024**2/len(process)
+            )
+        host_averages[host] = round(sum(process_averages),2)
+    total_average = sum([host_averages[host] for host in host_averages.keys()])
+    
+    # calculate accumulated traffic
+    host_accumulated = {}
+    for host in hosts.keys():
+        process_sums = []
+        for process in hosts[host]:
+            process_sums.append(float(sum([ p[1] + p[2] for p in process ]))/1024**4)
+        host_accumulated[host] = round(sum(process_sums),2)
+    host_accumulated_total = sum([host_accumulated[host] for host in host_accumulated.keys()])
+
+    # generate html page
+    with open("templates/main.jinja.html") as f:
+        template = jinja2.Template(f.read())
+
+    with open("report/index.html", "w") as f:
+        f.write(template.render(
+            hosts=hosts.keys(),
+            host_averages=host_averages,
+            total_average=total_average,
+            host_accumulated=host_accumulated,
+            host_accumulated_total=host_accumulated_total
+        ))
