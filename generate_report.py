@@ -78,7 +78,10 @@ if __name__ == "__main__":
     for host in hosts.keys():
         partitioned_data = map(lambda x: partition_data(x, chunk_size=96), 
                                hosts[host])
-        chart = pygal.StackedLine(fill=True, interpolate="hermite")
+        chart = pygal.StackedLine(fill=True, interpolate="hermite",
+                                  style=pygal.style.LightStyle,
+                                  legend_at_bottom=True,
+                                  show_dots=False)
         chart.title = host
         chart.x_labels = []
         for x in zip(range(len(partitioned_data)), partitioned_data):
