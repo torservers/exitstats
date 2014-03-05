@@ -36,7 +36,7 @@ def partition_data(dataset, chunk_size):
         read_bytes = [ x[1] for x in chunk ]
         written_bytes = [ x[2] for x in chunk ]
         partitioned_data.append(
-            (timestamps[len(chunk)/2], 
+            (timestamps[0], 
              sum(read_bytes)/len(read_bytes),
              sum(written_bytes)/len(written_bytes)))
     return partitioned_data
