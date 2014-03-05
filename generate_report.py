@@ -66,12 +66,14 @@ if __name__ == "__main__":
         chart = pygal.StackedLine(fill=True, interpolate="hermite",
                                   style=pygal.style.LightStyle,
                                   legend_at_bottom=True,
-                                  show_dots=False)
-        chart.title = host
+                                  show_dots=False,
+                                  y_title="MByte/s",
+                                  x_title="Days")
+        #chart.title = host
         chart.x_labels = []
-        for x in zip(range(len(partitioned_data)), partitioned_data):
-            if x[0] % 7 == 0:
-                chart.x_labels.append(datetime.fromtimestamp(int(x[1][0][0])).strftime("%d-%m-%Y"))
+        for x in zip(range(len(partitioned_data[0])), partitioned_data[0]):
+            chart.x_labels.append(datetime.fromtimestamp(int(x[1][0]))
+                                  .strftime("%d"))
 
         for number, process in zip(range(len(partitioned_data)), partitioned_data):
             chart.add("Process %i" % number, [ float(x[1] + x[2]) / 900 / 1024**2 for x in process ])
