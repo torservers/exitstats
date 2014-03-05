@@ -63,6 +63,14 @@ if __name__ == "__main__":
     for host in hosts.keys():
         partitioned_data = map(lambda x: partition_data(x, chunk_size=96), 
                                hosts[host])
+        
+        #clean up entries
+        for dataset in partitioned_data:
+            while datetime.fromtimestamp(int(dataset[0][0])).date().day > 28:
+                import pdb; pdb.set_trace()
+                dataset.pop(0)
+
+
         chart = pygal.StackedLine(fill=True, interpolate="hermite",
                                   style=pygal.style.LightStyle,
                                   legend_at_bottom=True,
