@@ -42,21 +42,6 @@ def partition_data(dataset, chunk_size):
     return partitioned_data
 
     
-def generate_host_diagram(descriptor_data):
-    timestamps = descriptor_data[0][0]
-    
-    ## prepare diagram data
-    # add up data of 12 hours
-    
-
-    # thin out timestamps
-    x_axis_labels = []
-    for t in map(range(len(timestamps)), timestamps):
-        if t[0] % 7 == 0:
-            x_axis_labels.append(datetime.fromtimestamp(t[1]).strftime("%d-%m-%Y"))
-        else:
-            x_axis_labels.append(None)
-        
 if __name__ == "__main__":
     aparser  = ArgumentParser(description="generate reports")
     aparser.add_argument("datafile")
