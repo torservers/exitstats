@@ -88,7 +88,6 @@ if __name__ == "__main__":
             
         chart.render_to_file("report/graphs/%s.svg" % host)
         
-        
     # calculate averages by physical host
     host_averages = {}
     for host in hosts.keys():
