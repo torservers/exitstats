@@ -67,7 +67,6 @@ if __name__ == "__main__":
         #clean up entries
         for dataset in partitioned_data:
             while datetime.fromtimestamp(int(dataset[0][0])).date().day > 28:
-                import pdb; pdb.set_trace()
                 dataset.pop(0)
 
 
