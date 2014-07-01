@@ -25,9 +25,9 @@ if __name__ == "__main__":
     except IOError:
         print("[!] Could not read hosts file.")
         sys.exit(-1)
-    except yaml.ReaderError:
-        print("[!] Error parsing YAML file.")
-        sys.exit(-1)
+#    except yaml.ReaderError:
+#        print("[!] Error parsing YAML file.")
+#        sys.exit(-1)
         
     fingerprints = []
     for hostname in hosts:
