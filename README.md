@@ -4,6 +4,14 @@ Generate statistics for tor exit relays.
 
 ## how to use ##
 
+### Prerequisites ###
+
+In order to run the script you need the following things:
+
+* Python installation
+* `python-yaml`
+* [stem](https://stem.torproject.org/)
+
 ### 0. Acquire hosts.yaml ###
 
 See `hosts.yaml.example` for an example. If you use ansible, you also may use the
