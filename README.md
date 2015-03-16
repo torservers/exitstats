@@ -11,6 +11,7 @@ In order to run the script you need the following things:
 * Python installation
 * `python-yaml`
 * [stem](https://stem.torproject.org/)
+* [pygal](https://github.com/Kozea/pygal)
 
 ### 0. Acquire hosts.yaml ###
 
